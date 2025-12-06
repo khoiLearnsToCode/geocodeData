@@ -22,8 +22,8 @@ def get_places():
     pois = df_pois[['ID', 'Tên địa điểm', 'Lat', 'Lon']].copy()
     pois.columns = ['id', 'name', 'lat', 'lon']
     
-    # Combine all
-    places = pd.concat([df_accommodations, eateries, pois], ignore_index=True)
+    # Combine all - Eateries/POIs first, then Accommodations
+    places = pd.concat([eateries, pois, df_accommodations], ignore_index=True)
     
     # Fix coordinates for eateries and POIs
     places['lat'] = places['lat'].astype(str).str.replace(',', '.').astype(float)
